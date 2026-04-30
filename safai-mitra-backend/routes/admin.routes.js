@@ -6,6 +6,7 @@ import {
   getDashboardStats,
   createEmployee,
   getAllEmployees,
+  getSingleAdminReport,
 } from "../controllers/admin.controller.js";
 
 import authMiddleware from "../middleware/auth.middleware.js";
@@ -29,6 +30,14 @@ router.get(
   adminGetAllReports,
 );
 
+//get single report
+router.get(
+  "/reports/:id",
+  authMiddleware,
+  roleMiddleware("admin"),
+  getSingleAdminReport
+);
+
 // 👷 Assign employee
 router.post(
   "/assign-employee",
@@ -50,7 +59,7 @@ router.post(
   "/create-employee",
   authMiddleware,
   roleMiddleware("admin"),
-  createEmployee
+  createEmployee,
 );
 
 // 👷 Get employees
@@ -58,7 +67,7 @@ router.get(
   "/employees",
   authMiddleware,
   roleMiddleware("admin"),
-  getAllEmployees
+  getAllEmployees,
 );
 
 export default router;

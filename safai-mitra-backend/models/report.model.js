@@ -48,6 +48,11 @@ const reportSchema = new mongoose.Schema(
       default: "",
     },
 
+    cleaned_image: {
+      type: String,
+      default: "",
+    },
+
     cleanedAt: {
       type: Date,
       default: null,
@@ -64,7 +69,7 @@ const reportSchema = new mongoose.Schema(
       default: null,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 reportSchema.index({ status: 1 });

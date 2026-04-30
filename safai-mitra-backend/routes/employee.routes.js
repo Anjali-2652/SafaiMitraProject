@@ -1,6 +1,7 @@
 import express from "express";
 import authMiddleware from "../middleware/auth.middleware.js";
 import roleMiddleware from "../middleware/role.middleware.js";
+import upload from "../middleware/upload.middleware.js";
 
 import {
   getAssignedReports,
@@ -14,7 +15,7 @@ router.get(
   "/reports",
   authMiddleware,
   roleMiddleware("employee"),
-  getAssignedReports
+  getAssignedReports,
 );
 
 // 👷 Update report status (cleaned/progress)
@@ -22,7 +23,8 @@ router.patch(
   "/reports/:id",
   authMiddleware,
   roleMiddleware("employee"),
-  updateStatus
+  upload.single("cleaned_image"),
+  updateStatus,
 );
 
 export default router;
